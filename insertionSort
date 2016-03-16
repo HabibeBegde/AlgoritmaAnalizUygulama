@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <locale.h>//Türkçe karakter için
+#include <time.h> //<ctime>
+
+void insertionSort(int dizi[], int elemanSayisi){
+   int i,j,temp;
+   int k=0, s=0; //k=karsilastirma, s=yerdegistirme
+   int girdi = 0;
+   for(i=1;i<elemanSayisi;i++){
+      temp=dizi[i];
+      j=i-1;
+      while((temp<dizi[j])&&(j>=0)){
+          k++; 
+          girdi=1;                      
+          dizi[j+1]=dizi[j];
+          j=j-1;
+          s++;
+      }
+      if(girdi==0)
+          k++;
+      dizi[j+1]=temp;
+      
+   }
+   printf("karsilastirma sayisi : %d\n", k);
+   printf("yerdegistirme sayisi : %d\n", s);
+   printf("n^2 = %d\n", elemanSayisi*elemanSayisi);
+}
+int main(int argc, char *argv[])
+{
+    float gecenSure=0;
+    setlocale (LC_ALL,"Turkish");
+    clock_t basla,bitir;
+    int size;
+    printf("dizi kac elemanli olsun:");
+    scanf("%d", &size);  
+    int dizi[size];    
+    printf("dizinin boyutu : %d\n", size); 
+    srand(time(NULL));
+    int i;
+    for(i=0; i<size; i++){
+        dizi[i]=rand()%1000000;
+      //  printf("%d. sayi   %d\n", i+1, dizi[i]);            
+    }
+    basla=clock();
+    insertionSort(dizi, size);
+    bitir=clock();
+    gecenSure=(bitir-basla)/CLOCKS_PER_SEC;
+    printf("gecen süre: %.21f \n",gecenSure);
+   for(i=0; i<size; i++)
+        printf("%d\t", dizi[i]);
+
+  
+  system("PAUSE");	
+  return 0;
+}
