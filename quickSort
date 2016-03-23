@@ -1,0 +1,63 @@
+import random
+import time 
+#dizi oluşturan fonksiyon
+def createArray(size):
+    array = []
+    for i in range(0,size):
+        array.append(int((random.uniform(-10000,10000))))
+    return array
+    
+#sıralama algoritması
+def quickSort(alist):
+   quickSortHelper(alist,0,len(alist)-1)
+   
+
+#sıralama işlemi için sayıyı ortaya atan yardımcı
+def quickSortHelper(alist,first,last):
+   if first<last:
+
+       splitpoint = partition(alist,first,last)
+
+       quickSortHelper(alist,first,splitpoint-1)
+       quickSortHelper(alist,splitpoint+1,last)
+ 
+c = 0
+def partition(alist,first,last):
+   pivotvalue = alist[first]
+   global c
+   leftmark = first+1
+   rightmark = last
+
+   done = False
+   while not done:
+
+       while leftmark <= rightmark and alist[leftmark] <= pivotvalue:
+           leftmark = leftmark + 1
+           c = c + 1     
+       while alist[rightmark] >= pivotvalue and rightmark >= leftmark:
+           rightmark = rightmark -1
+           c = c + 1
+       if rightmark < leftmark:
+           done = True
+       else:
+           temp = alist[leftmark]
+           alist[leftmark] = alist[rightmark]
+           alist[rightmark] = temp
+
+   temp = alist[first]
+   alist[first] = alist[rightmark]
+   alist[rightmark] = temp
+    
+
+   return rightmark
+size = int(input("array,size ? "))
+
+alist = createArray(size)
+print(createArray(size))
+
+print(alist)
+print(c)
+t1 = time.time()
+quickSort(alist)
+print("quick sortun zamanı", time.time() - t1)
+print("karsilastirma sayisi : ",c)
