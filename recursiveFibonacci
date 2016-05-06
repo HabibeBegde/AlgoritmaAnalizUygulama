@@ -1,0 +1,28 @@
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+double dizi[1000];
+double fib(int n){
+    if (n <= 1){
+        return n;
+        }        
+    if (dizi[n] != -1){
+        return dizi[n];
+        }  
+    dizi[n] = fib(n -1) + fib(n-2);
+    return dizi[n];
+}
+int main(int argc, char *argv[])
+{    
+    for(int i=0; i<1000; i++){
+            dizi[i]=-1; 
+            }   
+    int n;
+    cout<<"sayi giriniz : ";
+    cin>>n;
+    double sonuc=fib(n);
+    cout<<sonuc;
+    system("PAUSE");
+    return EXIT_SUCCESS;
+}
